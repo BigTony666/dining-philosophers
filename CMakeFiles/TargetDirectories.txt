@@ -1,0 +1,3 @@
+/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/CMakeFiles/rebuild_cache.dir
+/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/CMakeFiles/edit_cache.dir
+/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/CMakeFiles/philosophers_dinning.dir

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="philosophers_dinning"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="philosophers_dinning">
+				<Option output="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/philosophers_dinning" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 philosophers_dinning"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="philosophers_dinning/fast">
+				<Option output="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/philosophers_dinning" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 philosophers_dinning/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bigtony/school-resources/Northeastern\ University/High-Performance-Computing/homework/HW2/philosophers-dinning/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/include/fork.h">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/include/philosopher.h">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/include/topic.h">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/src/fork.cpp">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/src/main.cpp">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/src/philosopher.cpp">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/src/topic.cpp">
+			<Option target="philosophers_dinning"/>
+		</Unit>
+		<Unit filename="/Users/bigtony/school-resources/Northeastern University/High-Performance-Computing/homework/HW2/philosophers-dinning/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

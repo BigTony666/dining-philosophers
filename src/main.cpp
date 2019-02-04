@@ -1,129 +1,144 @@
 #include <stdio.h>
 #include <iostream>
+#include <pthread.h>
+#include <vector>
+#include <zconf.h>
+#include <random>
 
+#include "philosopher.h"
+#include "fork.h"
+#include "topic.h"
 #include "cxxopts.hpp"
 
+#define DINING_TIME 20
+
+pthread_mutex_t global_lock_log;
+
+struct thread_data{
+    pd::Philosopher *philosopher;
+};
+
 cxxopts::ParseResult
-parse(int argc, char* argv[])
-{
-    try
-    {
+parse(int argc, char *argv[]) {
+    try {
         cxxopts::Options options(argv[0], "A CLI to visualize Philosophers Dinning Problem");
         options
                 .positional_help("[optional args]")
                 .show_positional_help();
 
-        bool apple = false;
-
         options
                 .allow_unrecognised_options()
                 .add_options()
-                        ("a,apple", "an apple", cxxopts::value<bool>(apple))
-                        ("b,bob", "Bob")
-                        ("t,true", "True", cxxopts::value<bool>()->default_value("true"))
-                        ("f, file", "File", cxxopts::value<std::vector<std::string>>(), "FILE")
-                        ("i,input", "Input", cxxopts::value<std::string>())
-                        ("o,output", "Output file", cxxopts::value<std::string>()
-                                ->default_value("a.out")->implicit_value("b.def"), "BIN")
-                        ("positional",
-                         "Positional arguments: these are the arguments that are entered "
-                         "without an option", cxxopts::value<std::vector<std::string>>())
-                        ("long-description",
-                         "thisisareallylongwordthattakesupthewholelineandcannotbebrokenataspace")
+                        ("n, num", "number of philosophers", cxxopts::value<int>())
                         ("help", "Print help")
-                        ("int", "An integer", cxxopts::value<int>(), "N")
-                        ("float", "A floating point number", cxxopts::value<float>())
-                        ("option_that_is_too_long_for_the_help", "A very long option")
 #ifdef CXXOPTS_USE_UNICODE
-            ("unicode", u8"A help option with non-ascii: à. Here the size of the"
-        " string should be correct")
 #endif
                 ;
 
-        options.add_options("Group")
-                ("c,compile", "compile")
-                ("d,drop", "drop", cxxopts::value<std::vector<std::string>>());
-
-        options.parse_positional({"input", "output", "positional"});
-
         auto result = options.parse(argc, argv);
 
-        if (result.count("help"))
-        {
-            std::cout << options.help({"", "Group"}) << std::endl;
+        if (result.count("help")) {
+            std::cout << options.help({""}) << std::endl;
             exit(0);
         }
 
-        if (apple)
-        {
-            std::cout << "Saw option ‘a’ " << result.count("a") << " times " <<
-                      std::endl;
-        }
-
-        if (result.count("b"))
-        {
-            std::cout << "Saw option ‘b’" << std::endl;
-        }
-
-        if (result.count("f"))
-        {
-            auto& ff = result["f"].as<std::vector<std::string>>();
-            std::cout << "Files" << std::endl;
-            for (const auto& f : ff)
-            {
-                std::cout << f << std::endl;
-            }
-        }
-
-        if (result.count("input"))
-        {
-            std::cout << "Input = " << result["input"].as<std::string>()
-                      << std::endl;
-        }
-
-        if (result.count("output"))
-        {
-            std::cout << "Output = " << result["output"].as<std::string>()
-                      << std::endl;
-        }
-
-        if (result.count("positional"))
-        {
-            std::cout << "Positional = {";
-            auto& v = result["positional"].as<std::vector<std::string>>();
-            for (const auto& s : v) {
-                std::cout << s << ", ";
-            }
-            std::cout << "}" << std::endl;
-        }
-
-        if (result.count("int"))
-        {
-            std::cout << "int = " << result["int"].as<int>() << std::endl;
-        }
-
-        if (result.count("float"))
-        {
-            std::cout << "float = " << result["float"].as<float>() << std::endl;
-        }
-
-        std::cout << "Arguments remain = " << argc << std::endl;
-
         return result;
 
-    } catch (const cxxopts::OptionException& e)
-    {
+    } catch (const cxxopts::OptionException &e) {
         std::cout << "error parsing options: " << e.what() << std::endl;
         exit(1);
     }
 }
 
+void* dine(void* threadarg) {
+    struct thread_data *local_data = (struct thread_data *) threadarg;
+    pd::Philosopher* philosopher = local_data->philosopher;
+    sleep(1);
 
-int main(int argc, char* argv[])
-{
+    while(philosopher->isSit) {
+        philosopher->think();
+        philosopher->eat();
+    }
+
+    pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
     auto result = parse(argc, argv);
-    auto arguments = result.arguments();
-    std::cout << "Saw " << arguments.size() << " arguments" << std::endl;
+    int num = 5;
+    if (result.count("num")) {
+        num = result["num"].as<int>();
+    }
+    pthread_mutex_t topic_mutex;
+    pthread_cond_t cv;
+    pthread_t threads[num];
+    pthread_mutex_t mutex_forks[num];
 
-    return 0;
+    pthread_cond_init(&cv, NULL);
+    pthread_mutex_init(&topic_mutex, NULL);
+    pthread_mutex_init(&global_lock_log, NULL);
+    for(int i = 0; i < num; i++) {
+        pthread_mutex_init(&mutex_forks[i], NULL);
+    }
+    pd::Topic topic {
+        cv,
+        topic_mutex
+    };
+
+    std::vector<pd::Philosopher*> philosophers;
+    std::vector<pd::Fork*> forks;
+
+    std::cout << "Creating "<< num << " philosophers........." << std::endl;
+    for(int i = 0; i < num; i++) {
+        forks.push_back(new pd::Fork(i + 1, i % num + 1, mutex_forks[i], topic));
+    }
+    for(int i = 0; i < num; i++) {
+        philosophers.push_back(new pd::Philosopher(i + 1, *forks[i], *forks[(i + 1) % num], global_lock_log));
+    }
+
+    std::cout << "Start the Dinner!!" << std::endl;
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+    struct thread_data thread_data_array[num];
+
+    // create threads and start work
+    for(int tid = 0; tid < num; tid++) {
+        thread_data_array[tid].philosopher = philosophers[tid];
+
+        int rc = pthread_create(&threads[tid], &attr, dine, (void *) &thread_data_array[tid]);
+
+        if (rc){
+            printf("ERROR; return code from pthread_create() is %d\n", rc);
+            exit(-1);
+        }
+    }
+
+    /** Dining... */
+    sleep(DINING_TIME);
+
+    for(int i = 0; i < num; i++) {
+        philosophers[i]->isSit = false;
+    }
+
+    // wait for all threads to complete their work
+    for(int tid = 0; tid < num; tid++) {
+        std::cout << "Philosopher " << tid << " leaves the table." << std::endl;
+        int rc = pthread_join(threads[tid], NULL);
+        if (rc)
+        {
+            printf("ERROR; return code from pthread_join() is %d\n", rc);
+            exit(-1);
+        }
+    }
+
+    std::cout << "End the Dinner!!" << std::endl;
+
+    for(int i = 0; i < num; i++) {
+        delete philosophers[i];
+        delete forks[i];
+    }
+    pthread_mutex_destroy(&global_lock_log);
+    pthread_mutex_destroy(&topic_mutex);
+    pthread_exit(NULL);
 }

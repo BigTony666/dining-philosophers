@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.13.1/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.13.1/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = "/Users/bigtony/school-resources/Northeastern University/High
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.13.1/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.13.1/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,6 +123,33 @@ philosophers_dinning/fast:
 	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/build
 .PHONY : philosophers_dinning/fast
 
+src/fork.o: src/fork.cpp.o
+
+.PHONY : src/fork.o
+
+# target to build an object file
+src/fork.cpp.o:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/fork.cpp.o
+.PHONY : src/fork.cpp.o
+
+src/fork.i: src/fork.cpp.i
+
+.PHONY : src/fork.i
+
+# target to preprocess a source file
+src/fork.cpp.i:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/fork.cpp.i
+.PHONY : src/fork.cpp.i
+
+src/fork.s: src/fork.cpp.s
+
+.PHONY : src/fork.s
+
+# target to generate assembly for a file
+src/fork.cpp.s:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/fork.cpp.s
+.PHONY : src/fork.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -150,6 +177,60 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/philosopher.o: src/philosopher.cpp.o
+
+.PHONY : src/philosopher.o
+
+# target to build an object file
+src/philosopher.cpp.o:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/philosopher.cpp.o
+.PHONY : src/philosopher.cpp.o
+
+src/philosopher.i: src/philosopher.cpp.i
+
+.PHONY : src/philosopher.i
+
+# target to preprocess a source file
+src/philosopher.cpp.i:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/philosopher.cpp.i
+.PHONY : src/philosopher.cpp.i
+
+src/philosopher.s: src/philosopher.cpp.s
+
+.PHONY : src/philosopher.s
+
+# target to generate assembly for a file
+src/philosopher.cpp.s:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/philosopher.cpp.s
+.PHONY : src/philosopher.cpp.s
+
+src/topic.o: src/topic.cpp.o
+
+.PHONY : src/topic.o
+
+# target to build an object file
+src/topic.cpp.o:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/topic.cpp.o
+.PHONY : src/topic.cpp.o
+
+src/topic.i: src/topic.cpp.i
+
+.PHONY : src/topic.i
+
+# target to preprocess a source file
+src/topic.cpp.i:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/topic.cpp.i
+.PHONY : src/topic.cpp.i
+
+src/topic.s: src/topic.cpp.s
+
+.PHONY : src/topic.s
+
+# target to generate assembly for a file
+src/topic.cpp.s:
+	$(MAKE) -f CMakeFiles/philosophers_dinning.dir/build.make CMakeFiles/philosophers_dinning.dir/src/topic.cpp.s
+.PHONY : src/topic.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... philosophers_dinning"
+	@echo "... src/fork.o"
+	@echo "... src/fork.i"
+	@echo "... src/fork.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/philosopher.o"
+	@echo "... src/philosopher.i"
+	@echo "... src/philosopher.s"
+	@echo "... src/topic.o"
+	@echo "... src/topic.i"
+	@echo "... src/topic.s"
 .PHONY : help
 
 

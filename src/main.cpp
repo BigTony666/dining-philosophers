@@ -1,3 +1,16 @@
+/**********************************
+ * Dining Philosophers Problem in Chandy/Misra algorithm.
+ *
+ * DESCRIPTION: A program to solve Dining Philosophers Problem
+ * in Chandy/Misra algorithm by using pthreads.
+ *
+ * Author: Kejie Zhang
+ * LAST UPDATED: 02/04/2019
+ *
+ * USEFUL REFERENCE:
+ *    -> Pthreads: https://computing.llnl.gov/tutorials/pthreads/
+ *    -> Dining Philosophers Problem: https://en.wikipedia.org/wiki/Dining_philosophers_problem
+**********************************/
 #include <stdio.h>
 #include <iostream>
 #include <pthread.h>
@@ -10,6 +23,7 @@
 #include "topic.h"
 #include "cxxopts.hpp"
 
+/** Define global variables */
 #define DINING_TIME 20
 
 pthread_mutex_t global_lock_log;
@@ -18,6 +32,7 @@ struct thread_data{
     pd::Philosopher *philosopher;
 };
 
+/** Parse the command line parameters */
 cxxopts::ParseResult
 parse(int argc, char *argv[]) {
     try {
@@ -27,7 +42,6 @@ parse(int argc, char *argv[]) {
                 .show_positional_help();
 
         options
-                .allow_unrecognised_options()
                 .add_options()
                         ("n, num", "number of philosophers", cxxopts::value<int>())
                         ("help", "Print help")
@@ -36,6 +50,11 @@ parse(int argc, char *argv[]) {
                 ;
 
         auto result = options.parse(argc, argv);
+
+        if (result.count("num") == 0) {
+            std::cout << options.help({""}) << std::endl;
+            exit(0);
+        }
 
         if (result.count("help")) {
             std::cout << options.help({""}) << std::endl;
@@ -50,6 +69,7 @@ parse(int argc, char *argv[]) {
     }
 }
 
+/** Dine worker function */
 void* dine(void* threadarg) {
     struct thread_data *local_data = (struct thread_data *) threadarg;
     pd::Philosopher* philosopher = local_data->philosopher;
@@ -63,7 +83,9 @@ void* dine(void* threadarg) {
     pthread_exit(NULL);
 }
 
+/** Main function */
 int main(int argc, char *argv[]) {
+    /*** Parse the command line parameters */
     auto result = parse(argc, argv);
     int num = 5;
     if (result.count("num")) {
@@ -74,6 +96,7 @@ int main(int argc, char *argv[]) {
     pthread_t threads[num];
     pthread_mutex_t mutex_forks[num];
 
+    /** Initialize mutex and conditions variable */
     pthread_cond_init(&cv, NULL);
     pthread_mutex_init(&topic_mutex, NULL);
     pthread_mutex_init(&global_lock_log, NULL);
@@ -85,6 +108,7 @@ int main(int argc, char *argv[]) {
         topic_mutex
     };
 
+    /** Initialize philosophers and forks */
     std::vector<pd::Philosopher*> philosophers;
     std::vector<pd::Fork*> forks;
 
@@ -96,6 +120,7 @@ int main(int argc, char *argv[]) {
         philosophers.push_back(new pd::Philosopher(i + 1, *forks[i], *forks[(i + 1) % num], global_lock_log));
     }
 
+    /** Create threads and start work */
     std::cout << "Start the Dinner!!" << std::endl;
     pthread_attr_t attr;
     pthread_attr_init(&attr);
@@ -117,6 +142,7 @@ int main(int argc, char *argv[]) {
     /** Dining... */
     sleep(DINING_TIME);
 
+    /** End the dining */
     for(int i = 0; i < num; i++) {
         philosophers[i]->isSit = false;
     }
@@ -134,6 +160,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "End the Dinner!!" << std::endl;
 
+    /** Release resources */
     for(int i = 0; i < num; i++) {
         delete philosophers[i];
         delete forks[i];

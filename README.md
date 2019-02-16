@@ -14,10 +14,18 @@ Chandy/Misra algorithm allows any number of philosophers(threads) to request for
  
 ## How to run
 
+Make sure the system has a `cmake` with a 2.8 or higher version, `gcc` with a 4.8 or higher version.
+
+Run the cmake to generate makefile:
+
+```sh
+$ cmake .
+```
+
 Makefile has been created, just run `make` command in terminal:
 
 ```sh
-make
+$ make
 ```
 
 An executable program called `philosophers_dinning` is generated.

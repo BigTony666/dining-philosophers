@@ -8,6 +8,11 @@
   <p>An implementation to solve Dining Philosophers Problem in Chandy/Misra algorithm by using pthreads.</p>
 </div>
 
+- [Implementation](#implementation)
+- [How to run](#how-to-run)
+- [OpenMP](#openmp)
+- [Reference](#reference)
+
 ## Implementation
 
 Chandy/Misra algorithm allows any number of philosophers(threads) to request for any number of forks(resources). At the beginning, for each philosopher who will compete for a resource, we initialize the forks and give each of them to the lower-ranking philosopher. Each fork is either clean or dirty. Initially, all the forks ate dirty. When a philosopher wants to use resources (that is, to eat), he must get it from his neighbors who compete with him. He sends a request for each fork that he currently does not have. When the philosopher who owns that fork receives the request from other philosopher, if the fork is clean, then he keeps it, otherwise it wipes it to clean and hand over the fork to that philosopher who requests it. When a philosopher finishes to eat, both his forks become dirty. If another philosopher had previously requested the fork, he wiped it clean and handed it over. This solution allows for a lot of parallelism and is suitable for arbitrary number of threads and resources. 
@@ -49,6 +54,10 @@ Run the program with the specific argument:
 ```sh
 $ ./philosophers_dinning -n 5
 ```
+
+## OpenMP
+
+In **openmp** directory, there is a OpenMP version of philosophers dinning solution. Make sure your compiler is supported OpenMP.
 
 ## Reference
 
